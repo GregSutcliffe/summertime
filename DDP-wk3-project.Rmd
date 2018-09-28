@@ -1,0 +1,42 @@
+---
+title: "Summer Temperature & Rainfall exploration"
+author: "Greg Sutcliffe"
+date: "28 September 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Summer Temperature & Rainfall exploration
+
+This is a Plotly chart which investigates the **mean** temperature and **total** rainfall for the summer months (defined as May to September, inclusive) over the last 50+ years.
+
+### Data source
+
+This is based on the Met Office UKCP09 daily climate dataset, cited as:
+```
+Met Office (2017): UKCP09: Met Office gridded land surface climate
+observations - daily temperature and precipitation at 5km resolution.
+Centre for Environmental Data Analysis, 2018-07-05
+http://catalogue.ceda.ac.uk/uuid/319b3f878c7d4cbfbdb356e19d8061d6
+```
+
+The data shown is for a single 5km x 5km area near while the author lives.
+
+## Good vs Bad summers
+
+In this chart, there are two panels:
+
+* The upper panel displays the mean temperatue per year, with a linear regression (method = `lm`) fitted
+* The lower panel displays the total rainfall per year, coloured by the mean temperature of the year (cold years in blue, hot years in red)
+
+```{r message=FALSE,warning=FALSE, collapse=TRUE}
+source('./process_cp09_data.R')
+ggplotly(p)
+```
+
+The intention here is to show two things. First, there is a clear upward trend in the mean temperature of each summer (see the regression line added to the temperature chart). This is consistent with widespread knowledge of climate change, but it's a sane check that this data agrees
+
+Second, and more interesting, there is no correlation between rainfall and mean temperature for any given summer (correlation(temp,rain) => `r cor`). This is against the common view that a "bad" summer is both cold *and* wet - rather, it would seems that your view of a "bad" summer should first decide whether rain or temperature is important to you.
