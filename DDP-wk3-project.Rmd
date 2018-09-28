@@ -40,3 +40,9 @@ ggplotly(p)
 The intention here is to show two things. First, there is a clear upward trend in the mean temperature of each summer (see the regression line added to the temperature chart). This is consistent with widespread knowledge of climate change, but it's a sane check that this data agrees
 
 Second, and more interesting, there is no correlation between rainfall and mean temperature for any given summer (correlation(temp,rain) => `r cor`). This is against the common view that a "bad" summer is both cold *and* wet - rather, it would seems that your view of a "bad" summer should first decide whether rain or temperature is important to you.
+
+The code for this document can be viewed at
+
+* https://github.com/GregSutcliffe/summertime
+
+This document is licensed as CC-BY-SA
