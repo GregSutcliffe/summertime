@@ -2,7 +2,7 @@
 title: "Summer Temperature & Rainfall exploration"
 author: "Greg Sutcliffe"
 date: "28 September 2018"
-output: html_document
+output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is a Plotly chart which investigates the **mean** temperature and **total** rainfall for the summer months (defined as May to September, inclusive) over the last 50+ years.
 
-### Data source
+The aim is to investigate the sort of summers Scotland gets, raleting to the age-old argument that "Scotland never has any good summers". 
+
+## Data source
 
 This is based on the Met Office UKCP09 daily climate dataset, cited as:
 ```
@@ -27,19 +29,26 @@ The data shown is for a single 5km x 5km area near while the author lives.
 
 ## Good vs Bad summers
 
+(Chart is explained on the next slide)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source('./process_cp09_data.R')
+ggplotly(p)
+```
+
+## Explanation
+
 In this chart, there are two panels:
 
 * The upper panel displays the mean temperatue per year, with a linear regression (method = `lm`) fitted
 * The lower panel displays the total rainfall per year, coloured by the mean temperature of the year (cold years in blue, hot years in red)
 
-```{r message=FALSE,warning=FALSE, collapse=TRUE}
-source('./process_cp09_data.R')
-ggplotly(p)
-```
+We note two things; first, there is a clear upward trend in the mean temperature of each summer (see the regression line added to the temperature chart). This is consistent with expectations derived from climate change research.
 
-The intention here is to show two things. First, there is a clear upward trend in the mean temperature of each summer (see the regression line added to the temperature chart). This is consistent with widespread knowledge of climate change, but it's a sane check that this data agrees
+Second, and more interesting, there is no correlation between rainfall and mean temperature for any given summer (correlation(temp,rain) => `r cor`). This is against the common view that a "bad" summer is both cold *and* wet.
 
-Second, and more interesting, there is no correlation between rainfall and mean temperature for any given summer (correlation(temp,rain) => `r cor`). This is against the common view that a "bad" summer is both cold *and* wet - rather, it would seems that your view of a "bad" summer should first decide whether rain or temperature is important to you.
+## Conclusions
+
+The data agrees with our expectations around climate change, however the expectation that rainfall and temperature would be correlated is not true. It would seem that your view of a "bad" summer should depend on whether rain or temperature is important to the activities you would persue during the summer months
 
 The code for this document can be viewed at
 
